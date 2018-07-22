@@ -14,6 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	log.Print("> info")
 	n, err := s.Write([]byte("info\n"))
 	if err != nil {
 		log.Fatal(err)
