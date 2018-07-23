@@ -23,7 +23,7 @@ func main() {
 
 	buf := make([]byte, 128)
 	message := ""
-	r, err := regexp.Compile("result: .*\n")
+	r, err := regexp.Compile("result: 0\n")
 	for {
 		time.Sleep(time.Millisecond * 20)
 
