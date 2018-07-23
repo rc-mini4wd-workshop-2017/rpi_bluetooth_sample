@@ -4,7 +4,7 @@ import (
 	"github.com/tarm/serial"
 	"log"
 	"os"
-	"strings"
+	"regexp"
 	"time"
 )
 
@@ -23,8 +23,9 @@ func main() {
 
 	buf := make([]byte, 128)
 	message := ""
+	r, err := regexp.Compile("result: .*\n")
 	for {
-		time.Sleep(time.Millisecond * 500)
+		time.Sleep(time.Millisecond * 20)
 
 		n, err := s.Read(buf)
 		if err != nil {
@@ -32,7 +33,7 @@ func main() {
 		}
 		message = message + string(buf[:n])
 
-		if strings.Contains(message, "result") {
+		if r.MatchString(message) {
 			log.Print(message)
 			os.Exit(0)
 		}
